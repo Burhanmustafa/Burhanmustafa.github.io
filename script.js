@@ -244,41 +244,23 @@ function showErrorMessage() {
 }
 
 document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
     const form = this;
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const message = document.getElementById('message').value.trim();
     
     if (!name || !email || !message) {
+        e.preventDefault();
         alert('Please fill in all fields.');
         return;
     }
     
     const submitButton = form.querySelector('button[type="submit"]');
-    const originalText = submitButton.textContent;
-    submitButton.textContent = 'Opening Email...';
+    submitButton.textContent = 'Sending...';
     submitButton.disabled = true;
     
-    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
-    const body = encodeURIComponent(
-        `Hi Burhan,\n\n` +
-        `Name: ${name}\n` +
-        `Email: ${email}\n\n` +
-        `Message:\n${message}\n\n` +
-        `Best regards,\n${name}`
-    );
-    
-    const mailtoLink = `mailto:burhanmustafa808@gmail.com?subject=${subject}&body=${body}`;
-    
-    window.location.href = mailtoLink;
-    
     setTimeout(() => {
-        alert(`Thanks ${name}! Your email client should open with a pre-filled message. Just hit send to contact me!`);
-        form.reset();
-        submitButton.textContent = originalText;
-        submitButton.disabled = false;
+        alert(`Thank you ${name}! Your message has been sent. I'll get back to you soon!`);
     }, 1000);
 });
 
