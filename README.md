@@ -6,4 +6,6 @@ A modern, responsive personal portfolio showcasing my projects, experience, and 
 
 Visit: **[https://Burhanmustafa.github.io](https://Burhanmustafa.github.io)**
 
-Built with HTML5, CSS3, JavaScript, and GitHub API integration. 
+Built with HTML5, CSS3, JavaScript, and GitHub API integration.
+
+✨ Recently updated with cleaned code and minimal comments for better maintainability. 
