@@ -1,8 +1,6 @@
-// Configuration - Update these with your GitHub username and details
-const GITHUB_USERNAME = 'Burhanmustafa'; // Replace with your GitHub username
+const GITHUB_USERNAME = 'Burhanmustafa';
 const GITHUB_API_URL = `https://api.github.com/users/${GITHUB_USERNAME}`;
 
-// Project Media Mapping - Add screenshots and demo videos for your projects
 const PROJECT_MEDIA = {
     'visual-globe': {
         screenshot: 'screenshots/GlobeDark1.png',
@@ -26,15 +24,8 @@ const PROJECT_MEDIA = {
         screenshot: 'screenshots/UniGuard1.png',
         description: 'Comprehensive University Security Mobile App built with React Native, Firebase, Node.js backend, and MongoDB. Features real-time incident reporting, emergency alerts, campus safety mapping, and admin dashboard.'
     }
-    // Add more projects here as needed:
-    // 'project-name': {
-    //     screenshot: 'screenshots/project-name.png',
-    //     youtubeId: 'YOUTUBE_VIDEO_ID', // Optional
-    //     description: 'Project description with tech stack' // Optional override
-    // }
 };
 
-// Mobile Navigation
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 
@@ -43,13 +34,11 @@ hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
-// Close mobile menu when clicking on nav links
 document.querySelectorAll('.nav-link').forEach(n => n.addEventListener('click', () => {
     hamburger.classList.remove('active');
     navMenu.classList.remove('active');
 }));
 
-// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -63,7 +52,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar background on scroll
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (window.scrollY > 50) {
@@ -75,21 +63,15 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// GitHub API Functions
 async function fetchGitHubData() {
     try {
-        // Fetch user data
         const userResponse = await fetch(GITHUB_API_URL);
         const userData = await userResponse.json();
         
-        // Fetch repositories
         const reposResponse = await fetch(`${GITHUB_API_URL}/repos?sort=updated&per_page=50`);
         const reposData = await reposResponse.json();
         
-        // Update user stats
         updateUserStats(userData);
-        
-        // Display projects
         displayProjects(reposData);
         
     } catch (error) {
@@ -107,17 +89,15 @@ function updateUserStats(userData) {
 function displayProjects(repos) {
     const projectsGrid = document.getElementById('projectsGrid');
     
-    // Filter out forks and sort by stars and last updated
     const filteredRepos = repos
-        .filter(repo => !repo.fork && repo.description) // Remove forks and repos without description
+        .filter(repo => !repo.fork && repo.description)
         .sort((a, b) => {
-            // Sort by stars first, then by updated date
             if (b.stargazers_count !== a.stargazers_count) {
                 return b.stargazers_count - a.stargazers_count;
             }
             return new Date(b.updated_at) - new Date(a.updated_at);
         })
-        .slice(0, 12); // Show top 12 projects
+        .slice(0, 12);
 
     if (filteredRepos.length === 0) {
         projectsGrid.innerHTML = `
@@ -129,11 +109,9 @@ function displayProjects(repos) {
         return;
     }
 
-    // Generate project cards
     const projectCards = filteredRepos.map(repo => createProjectCard(repo)).join('');
     projectsGrid.innerHTML = projectCards;
 
-    // Initialize project filtering
     initializeProjectFilters();
 }
 
@@ -142,14 +120,11 @@ function createProjectCard(repo) {
     const updatedDate = new Date(repo.updated_at).toLocaleDateString();
     const projectMedia = PROJECT_MEDIA[repo.name];
     
-    // Use custom description if available, otherwise use repo description
     const description = projectMedia?.description || repo.description || 'No description available';
     
-    // Create media section HTML
     let mediaSection = '';
     if (projectMedia) {
         if (projectMedia.youtubeId && projectMedia.youtubeId !== 'YOUR_YOUTUBE_VIDEO_ID') {
-            // YouTube video embed
             mediaSection = `
                 <div class="project-media">
                     <div class="video-container">
@@ -163,7 +138,6 @@ function createProjectCard(repo) {
                 </div>
             `;
         } else if (projectMedia.screenshot) {
-            // Screenshot image
             mediaSection = `
                 <div class="project-media">
                     <img src="${projectMedia.screenshot}" 
@@ -238,13 +212,11 @@ function initializeProjectFilters() {
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Update active button
             filterButtons.forEach(btn => btn.classList.remove('active'));
             button.classList.add('active');
 
             const filter = button.getAttribute('data-filter');
 
-            // Filter projects
             projectCards.forEach(card => {
                 if (filter === 'all') {
                     card.style.display = 'block';
@@ -271,7 +243,6 @@ function showErrorMessage() {
     `;
 }
 
-// Contact Form
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
@@ -279,16 +250,31 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     const name = formData.get('name');
     const email = formData.get('email');
     const message = formData.get('message');
-
-    // Here you would typically send the form data to a server
-    // For now, we'll show a success message
-    alert(`Thank you ${name}! Your message has been received. I'll get back to you soon!`);
     
-    // Reset form
-    this.reset();
+    fetch(this.action, {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'Accept': 'application/json'
+        }
+    }).then(response => {
+        if (response.ok) {
+            alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you soon!`);
+            this.reset();
+        } else {
+            response.json().then(data => {
+                if (Object.hasOwnProperty.call(data, 'errors')) {
+                    alert('There was an error sending your message. Please try again or email me directly at burhanmustafa808@gmail.com');
+                } else {
+                    alert('There was an error sending your message. Please try again or email me directly at burhanmustafa808@gmail.com');
+                }
+            });
+        }
+    }).catch(error => {
+        alert('There was an error sending your message. Please try again or email me directly at burhanmustafa808@gmail.com');
+    });
 });
 
-// Animate elements on scroll
 function animateOnScroll() {
     const elements = document.querySelectorAll('.project-card, .stat, .skill-tag');
     
@@ -303,7 +289,6 @@ function animateOnScroll() {
     });
 }
 
-// Initial setup for scroll animations
 document.addEventListener('DOMContentLoaded', () => {
     const elements = document.querySelectorAll('.project-card, .stat, .skill-tag');
     elements.forEach(element => {
@@ -315,7 +300,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 window.addEventListener('scroll', animateOnScroll);
 
-// Typing animation for hero subtitle
 function typeWriter(element, text, speed = 100) {
     let i = 0;
     element.innerHTML = '';
@@ -331,23 +315,17 @@ function typeWriter(element, text, speed = 100) {
     type();
 }
 
-// Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Start typing animation
     const subtitle = document.querySelector('.hero-subtitle');
     if (subtitle) {
         const originalText = subtitle.textContent;
         typeWriter(subtitle, originalText, 80);
     }
     
-    // Fetch GitHub data
     fetchGitHubData();
-    
-    // Initial animation check
     setTimeout(animateOnScroll, 100);
 });
 
-// Add some interactive features
 document.querySelectorAll('.project-card').forEach(card => {
     card.addEventListener('mouseenter', function() {
         this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -358,10 +336,8 @@ document.querySelectorAll('.project-card').forEach(card => {
     });
 });
 
-// Update copyright year
 document.querySelector('.footer p').innerHTML = `&copy; ${new Date().getFullYear()} Burhan Mustafa. Built with ❤️ and GitHub API.`;
 
-// Add keyboard navigation
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         hamburger.classList.remove('active');
@@ -369,7 +345,6 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Performance optimization: Throttle scroll events
 function throttle(func, limit) {
     let inThrottle;
     return function() {
