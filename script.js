@@ -246,12 +246,16 @@ function showErrorMessage() {
 document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
-    const formData = new FormData(this);
+    const form = this;
+    const formData = new FormData(form);
     const name = formData.get('name');
-    const email = formData.get('email');
-    const message = formData.get('message');
     
-    fetch(this.action, {
+    const submitButton = form.querySelector('button[type="submit"]');
+    const originalText = submitButton.textContent;
+    submitButton.textContent = 'Sending...';
+    submitButton.disabled = true;
+    
+    fetch(form.action, {
         method: 'POST',
         body: formData,
         headers: {
@@ -260,18 +264,25 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     }).then(response => {
         if (response.ok) {
             alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you soon!`);
-            this.reset();
+            form.reset();
         } else {
-            response.json().then(data => {
-                if (Object.hasOwnProperty.call(data, 'errors')) {
-                    alert('There was an error sending your message. Please try again or email me directly at burhanmustafa808@gmail.com');
-                } else {
-                    alert('There was an error sending your message. Please try again or email me directly at burhanmustafa808@gmail.com');
-                }
-            });
+            throw new Error('Form submission failed');
         }
     }).catch(error => {
-        alert('There was an error sending your message. Please try again or email me directly at burhanmustafa808@gmail.com');
+        console.error('Form submission error:', error);
+        const email = formData.get('_replyto');
+        const message = formData.get('message');
+        const subject = encodeURIComponent('Portfolio Contact');
+        const body = encodeURIComponent(`Hi Burhan,\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\nBest regards,\n${name}`);
+        
+        if (confirm('The contact form is having issues. Would you like to open your email client to send the message directly?')) {
+            window.location.href = `mailto:burhanmustafa808@gmail.com?subject=${subject}&body=${body}`;
+        } else {
+            alert('Sorry, there was an issue with the form. Please email me directly at burhanmustafa808@gmail.com');
+        }
+    }).finally(() => {
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
     });
 });
 
