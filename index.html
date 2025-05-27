@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Burhan Mustafa - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="#home">Portfolio</a>
+            </div>
+            <div class="nav-menu">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+                <a href="#experience" class="nav-link">Experience</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    Hi, I'm <span class="highlight">Burhan Mustafa</span>
+                </h1>
+                <p class="hero-subtitle">Computer Science Student & Data Engineering Specialist</p>
+                <p class="hero-description">
+                    4th year CS student at University of Waterloo with proven experience in data engineering, QA automation, and machine learning across 3+ internships.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#projects" class="btn btn-primary">View My Work</a>
+                    <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="profile_pic.jpg" alt="Burhan Mustafa" class="profile-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>
+                        I'm a passionate 4th year Computer Science student at the University of Waterloo with a strong academic record (3.80 GPA) 
+                        and hands-on experience in data engineering and software quality assurance. I've completed three impactful internships 
+                        where I've reduced manual processes, improved data accuracy, and built robust testing frameworks.
+                    </p>
+                    <p>
+                        My experience spans from automating QA processes at ISED to building AI risk models at Canada Border Services Agency, 
+                        and geospatial data validation at Statistics Canada. I'm particularly passionate about leveraging data to solve 
+                        real-world problems and building scalable, tested solutions that make a difference.
+                    </p>
+                    <p>
+                        When I'm not coding, you can find me participating in hackathons like Hack the North, contributing to GameJams, 
+                        or mentoring other students in programming fundamentals.
+                    </p>
+                    <div class="skills">
+                        <h3>Skills & Technologies</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Java</span>
+                            <span class="skill-tag">SQL</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">C/C++</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Selenium</span>
+                            <span class="skill-tag">Pandas</span>
+                            <span class="skill-tag">GeoPandas</span>
+                            <span class="skill-tag">Machine Learning</span>
+                            <span class="skill-tag">QA & Testing</span>
+                            <span class="skill-tag">Git</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat">
+                        <div class="stat-number" id="repoCount">--</div>
+                        <div class="stat-label">Public Repositories</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="followers">--</div>
+                        <div class="stat-label">GitHub Followers</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number" id="following">--</div>
+                        <div class="stat-label">Following</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Work Experience Section -->
+    <section id="experience" class="experience">
+        <div class="container">
+            <h2 class="section-title">Work Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Sep 2023 – May 2024</div>
+                    <div class="timeline-content">
+                        <h3 class="job-title">Software Engineer – QA & Automation</h3>
+                        <h4 class="company">ISED (Innovation, Science and Economic Development Canada)</h4>
+                        <ul class="achievements">
+                            <li>Reduced manual QA effort by <strong>60%</strong> by designing Selenium-based regression test suites in Python</li>
+                            <li>Integrated automated tests into GitHub Actions for nightly builds</li>
+                            <li>Improved patent data query performance by <strong>55%</strong> by writing SQL test cases and Python scripts</li>
+                            <li>Increased patent search accuracy by <strong>35%</strong> by creating NLP test scripts for lemmatization and keyword indexing across 2M+ entries</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Sep 2022 – Dec 2022</div>
+                    <div class="timeline-content">
+                        <h3 class="job-title">AI Engineer – Risk Modeling</h3>
+                        <h4 class="company">Canada Border Services Agency</h4>
+                        <ul class="achievements">
+                            <li>Increased ML classifier accuracy by <strong>30%</strong> and reduced false positives by <strong>18%</strong></li>
+                            <li>Built unit and integration tests with Pytest for shipment risk detection models</li>
+                            <li>Ensured consistent model inputs by automating schema validation for <strong>50K+</strong> weekly shipment records</li>
+                            <li>Built precision/recall monitoring scripts to test ML model behavior under real-world edge cases</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Jan 2022 – May 2022</div>
+                    <div class="timeline-content">
+                        <h3 class="job-title">Data Engineer – Geospatial Validation</h3>
+                        <h4 class="company">Statistics Canada</h4>
+                        <ul class="achievements">
+                            <li>Reduced spatial coordinate errors by <strong>40%</strong> by writing Python and GeoPandas tests to validate map layers across <strong>1.2M+</strong> data points</li>
+                            <li>Delivered accurate visuals for 3+ UN reports by testing OSM and isochrone datasets for anomalies</li>
+                            <li>Boosted QA cycle speed by integrating test assertions directly into ETL pipelines</li>
+                            <li>Enabled early detection of data mismatches in geospatial flows</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Oct 2019 – Mar 2020</div>
+                    <div class="timeline-content">
+                        <h3 class="job-title">Lead Mentor & Project Manager</h3>
+                        <h4 class="company">FIRST Robotics</h4>
+                        <ul class="achievements">
+                            <li>Taught <strong>80+</strong> students the fundamentals of Python and C programming</li>
+                            <li>Led project planning and quality review for competition submissions</li>
+                            <li>Scaled outreach and participation by <strong>150%</strong> through curriculum redesign</li>
+                            <li>Reinforced best practices for testing and documentation in early-stage software projects</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="javascript">JavaScript</button>
+                <button class="filter-btn" data-filter="python">Python</button>
+                <button class="filter-btn" data-filter="web">Web</button>
+            </div>
+            <div class="projects-grid" id="projectsGrid">
+                <!-- Projects will be dynamically loaded here -->
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Loading projects from GitHub...</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Let's Connect</h3>
+                    <p>I'm always interested in new opportunities, internships, and collaborations in data engineering and software development. Feel free to reach out!</p>
+                    <div class="contact-links">
+                        <a href="https://github.com/Burhanmustafa" class="contact-link" target="_blank">
+                            <i class="fab fa-github"></i>
+                            <span>GitHub</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/burhan-mustafa/" class="contact-link" target="_blank">
+                            <i class="fab fa-linkedin"></i>
+                            <span>LinkedIn</span>
+                        </a>
+                        <a href="mailto:burhanmustafa808@gmail.com" class="contact-link">
+                            <i class="fas fa-envelope"></i>
+                            <span>Email</span>
+                        </a>
+                        <a href="tel:416-854-0886" class="contact-link">
+                            <i class="fas fa-phone"></i>
+                            <span>Phone</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea id="message" name="message" placeholder="Your Message" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Burhan Mustafa. Built with ❤️ and GitHub API.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html> 
