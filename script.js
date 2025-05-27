@@ -247,43 +247,39 @@ document.getElementById('contactForm').addEventListener('submit', function(e) {
     e.preventDefault();
     
     const form = this;
-    const formData = new FormData(form);
-    const name = formData.get('name');
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    if (!name || !email || !message) {
+        alert('Please fill in all fields.');
+        return;
+    }
     
     const submitButton = form.querySelector('button[type="submit"]');
     const originalText = submitButton.textContent;
-    submitButton.textContent = 'Sending...';
+    submitButton.textContent = 'Opening Email...';
     submitButton.disabled = true;
     
-    fetch(form.action, {
-        method: 'POST',
-        body: formData,
-        headers: {
-            'Accept': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
-            alert(`Thank you ${name}! Your message has been sent successfully. I'll get back to you soon!`);
-            form.reset();
-        } else {
-            throw new Error('Form submission failed');
-        }
-    }).catch(error => {
-        console.error('Form submission error:', error);
-        const email = formData.get('_replyto');
-        const message = formData.get('message');
-        const subject = encodeURIComponent('Portfolio Contact');
-        const body = encodeURIComponent(`Hi Burhan,\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}\n\nBest regards,\n${name}`);
-        
-        if (confirm('The contact form is having issues. Would you like to open your email client to send the message directly?')) {
-            window.location.href = `mailto:burhanmustafa808@gmail.com?subject=${subject}&body=${body}`;
-        } else {
-            alert('Sorry, there was an issue with the form. Please email me directly at burhanmustafa808@gmail.com');
-        }
-    }).finally(() => {
+    const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+    const body = encodeURIComponent(
+        `Hi Burhan,\n\n` +
+        `Name: ${name}\n` +
+        `Email: ${email}\n\n` +
+        `Message:\n${message}\n\n` +
+        `Best regards,\n${name}`
+    );
+    
+    const mailtoLink = `mailto:burhanmustafa808@gmail.com?subject=${subject}&body=${body}`;
+    
+    window.location.href = mailtoLink;
+    
+    setTimeout(() => {
+        alert(`Thanks ${name}! Your email client should open with a pre-filled message. Just hit send to contact me!`);
+        form.reset();
         submitButton.textContent = originalText;
         submitButton.disabled = false;
-    });
+    }, 1000);
 });
 
 function animateOnScroll() {
